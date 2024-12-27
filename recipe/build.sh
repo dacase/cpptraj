@@ -18,14 +18,20 @@ if [ "$arch" == "Darwin" ]; then
 
 else
 
-   ./configure -cuda -readline -openmm -openblas -fftw3 -zlib -bzlib -shared -arpack gnu
+   mkdir -p build
+   cd build
+   ../configure -cmake -cuda -readline -openmm -openblas -fftw3 -zlib -bzlib -shared -arpack gnu
    make install
    make clean
-   ./configure -mpi -readline -openmm -openblas -fftw3 -zlib -bzlib -shared -arpack gnu
+   ../configure -cmake -mpi -readline -openmm -openblas -fftw3 -zlib -bzlib -shared -arpack gnu
    make install
    make clean
-   ./configure  -readline -openmm -openblas -fftw3 -zlib -bzlib -shared -arpack gnu
+   ../configure -cmake -openmp -readline -openmm -openblas -fftw3 -zlib -bzlib -shared -arpack gnu
    make install
+   make clean
+   ../configure -cmake -readline -openmm -openblas -fftw3 -zlib -bzlib -shared -arpack gnu
+   make install
+   cd ..
 
 fi
 
